@@ -67,7 +67,9 @@ module.exports = function (config, windowParams) {
       });
 
       authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
-        onCallback(newUrl);
+        if (newUrl.startsWith(urlParams.redirect_uri)) {
+          onCallback(newUrl);
+        }
       });
     });
   }
